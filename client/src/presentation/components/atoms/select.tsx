@@ -30,9 +30,9 @@ export function SelectInput({
   return (
     <Select
       defaultValue={defaultValue}
-      onValueChange={(v) => {
-        onChange?.(v);
-      }}
+      onValueChange={(v: string) => {
+          onChange?.(v);
+        }}
       value={value}
     >
       <SelectTrigger>
