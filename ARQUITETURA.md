@@ -105,10 +105,13 @@ Para manter uma organização e componentização que tornem o projeto modular e
 
 ## Definição da API
 
-A estrutura da API será RESTful com autenticação via JWT, a divisão ocorrerá por módulos relacionados diretamente as tabelas.
+A estrutura da API será RESTful com autenticação via JWT, a divisão ocorrerá por módulos relacionados diretamente às tabelas.
 
-- Usuários - ### **POST** `/users/admin`
-  Criação de um novo usuário **administrador**.
+### Usuários
+
+#### **POST** `/users/admin`
+
+Criação de um novo usuário **administrador**.
 
 **Request**
 
@@ -129,8 +132,11 @@ A estrutura da API será RESTful com autenticação via JWT, a divisão ocorrer�
 }
 ```
 
-- Notificações - ### **GET** `/notifications/member`
-  Retorna lista de notificações exclusivas aos membros.
+### Notificações
+
+#### **GET** `/notifications/member`
+
+Retorna lista de notificações exclusivas aos membros.
 
 **Request**
 
@@ -159,8 +165,11 @@ A estrutura da API será RESTful com autenticação via JWT, a divisão ocorrer�
 }
 ```
 
-- Financeiro - ### **PUT** `/payments?payment_id=614a74b8-d2b9-487f-86a4-8dc104d770c2`
-  Atualiza pagamento de usuário.
+### Financeiro
+
+#### **PUT** `/payments?payment_id=614a74b8-d2b9-487f-86a4-8dc104d770c2`
+
+Atualiza pagamento de usuário.
 
 **Request**
 
@@ -174,9 +183,9 @@ A estrutura da API será RESTful com autenticação via JWT, a divisão ocorrer�
 
 ```json
 {
-	"user_id": "a178a493-861e-4667-a323-0fdd81375be4",
-	"status: "canceled",
-	"value": 10.00
+  "user_id": "a178a493-861e-4667-a323-0fdd81375be4",
+  "status": "cancelled",
+  "value": 10.0
 }
 ```
 
