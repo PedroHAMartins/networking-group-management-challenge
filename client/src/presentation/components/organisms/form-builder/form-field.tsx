@@ -6,9 +6,14 @@ import {
   Path,
 } from "react-hook-form";
 import { Radio, SelectInput } from "../../atoms";
-import { Input, Field, FieldLabel, FieldError } from "@/components/ui";
-import { Checkbox } from "@radix-ui/react-checkbox";
-import { Label } from "@radix-ui/react-label";
+import {
+  Checkbox,
+  Field,
+  FieldError,
+  FieldLabel,
+  Input,
+  Label,
+} from "@/presentation/ui";
 
 interface Props<
   TFieldValues extends FieldValues,

@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/presentation/ui";
 import { ControllerFieldState } from "react-hook-form";
 
 interface Props {
@@ -30,7 +30,7 @@ export function SelectInput({
   return (
     <Select
       defaultValue={defaultValue}
-      onValueChange={(v) => {
+      onValueChange={(v: string) => {
         onChange?.(v);
       }}
       value={value}

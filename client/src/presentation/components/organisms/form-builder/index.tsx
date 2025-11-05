@@ -11,7 +11,7 @@ import {
 import { z, ZodObject, ZodRawShape } from "zod";
 import { FormField } from "./form-field";
 import { cn } from "@/lib/utils";
-import { FieldGroup, Button } from "@/components/ui";
+import { Button, FieldGroup } from "@/presentation/ui";
 
 export type FieldType = "text" | "radio" | "select" | "checkbox";
 
@@ -107,7 +107,11 @@ export function FormBuilder<TSchema extends ZodObject<ZodRawShape>>({
           />
         ))}
       </FieldGroup>
-      <Button type="submit" className="px-10">
+      <Button
+        type="submit"
+        className="px-10"
+        disabled={!form.formState.isValid}
+      >
         {submitText || "Submit"}
       </Button>
     </form>
