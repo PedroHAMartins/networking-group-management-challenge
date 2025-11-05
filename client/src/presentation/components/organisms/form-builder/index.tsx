@@ -109,7 +109,7 @@ export function FormBuilder<TSchema extends ZodObject<ZodRawShape>>({
       </FieldGroup>
       <Button
         type="submit"
-        className="px-10"
+        className="px-10 cursor-pointer"
         disabled={!form.formState.isValid}
       >
         {submitText || "Submit"}
