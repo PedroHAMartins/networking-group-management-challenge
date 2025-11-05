@@ -55,50 +55,53 @@ Relacionamentos:
 
 Para manter uma organização e componentização que tornem o projeto modular e com código reutilizável, a estrutura do frontend se baseia em uma arquitetura em camadas DDD (Domain-driven design), dividindo majoritariamente em Domain, Application e Infrastructure:
 
-.
-└── /client — Raiz do frontend  
- ├── /src — Código fonte  
- │ ├── /app — Rotas e actions  
- │ │ ├── /server-actions — Requisições para a API do backend  
- │ │ │ ├── /users — Agrupamento para requisições relacionadas a usuário  
- │ │ │ ├── /notifications — ...  
- │ │ │ ├── /payments — ...  
- │ │ │ ├── /referrals — ...  
- │ │ │ └── /meetings — ...  
- │ │ └── /routers — Rotas e páginas  
- │ │
-│ ├── /presentation — Arquivos relacionados à UI  
- │ │ ├── /ui — Componentes gerais sobre UI  
- │ │ │ ├── /atoms — Componentes de UI com estrutura pequena (ex: button, typography)  
- │ │ │ ├── /molecules — Componentes de UI com estrutura mediana (ex: modal, section)  
- │ │ │ └── /organisms — Componentes de UI com estrutura grande (ex: form, table)  
- │ │ └── /utils — Helpers de UI  
- │ │
-│ ├── /domain — Domain do projeto com entidades e enums  
- │ │ ├── /entities  
- │ │ └── /enums  
- │ │
-│ ├── /application  
- │ │ └── /dtos — DTOs das requests  
- │ │ ├── /user  
- │ │ │ ├── /requests  
- │ │ │ └── /responses  
- │ │ ├── /notifications — ...  
- │ │ ├── /payments — ...  
- │ │ ├── /referrals — ...  
- │ │ └── /meetings — ...  
- │ │
-│ ├── /infrastructure — Implementação concreta de APIs, adapters e configs  
- │ │ ├── /api  
- │ │ ├── /adapters  
- │ │ └── /config  
- │ │
-│ └── /shared — Helpers, hooks e etc, que são compartilhados entre as camadas  
- │ ├── /helpers  
- │ ├── /hooks  
- │ └── /utils  
- │
-└── /public — Assets públicos
+```plaintext
+/client                Raiz do frontend
+│
+├── /src               Código fonte
+│   │
+│   ├── /app               Rotas e actions
+│   │   ├── /server-actions        Requisições para a API do backend
+│   │   │   ├── /users                Requisições relacionadas a usuário
+│   │   │   ├── /notifications        ...
+│   │   │   ├── /payments             ...
+│   │   │   ├── /referrals            ...
+│   │   │   └── /meetings             ...
+│   │   └── /routers              Rotas e páginas
+│   │
+│   ├── /presentation        Arquivos relacionados à UI
+│   │   ├── /ui                 Componentes gerais de UI
+│   │   │   ├── /atoms              Componentes pequenos (ex: button, typography)
+│   │   │   ├── /molecules          Componentes médios (ex: modal, section)
+│   │   │   └── /organisms          Componentes grandes (ex: form, table)
+│   │   └── /utils               Helpers de UI
+│   │
+│   ├── /domain              Domain do projeto com entidades e enums
+│   │   ├── /entities
+│   │   └── /enums
+│   │
+│   ├── /application         Camada de application (DTOs e casos de uso)
+│   │   ├── /dtos                DTOs das requests
+│   │   │   ├── /user
+│   │   │   │   ├── /requests
+│   │   │   │   └── /responses
+│   │   │   ├── /notifications       ...
+│   │   │   ├── /payments            ...
+│   │   │   ├── /referrals           ...
+│   │   │   └── /meetings            ...
+│   │
+│   ├── /infrastructure      Implementação concreta de APIs, adapters e configs
+│   │   ├── /api
+│   │   ├── /adapters
+│   │   └── /config
+│   │
+│   └── /shared             Helpers, hooks, utils compartilhados entre camadas
+│       ├── /helpers
+│       ├── /hooks
+│       └── /utils
+│
+└── /public              Assets públicos
+```
 
 ## Definição da API
 
