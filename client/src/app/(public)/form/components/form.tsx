@@ -9,7 +9,7 @@ export function FormComponent() {
       formSchema={schema}
       fields={fields}
       submitText="Enviar"
-  onSubmit={(data: any) => console.log("submitted:", data)}
+      onSubmit={(data) => console.log("submitted:", data)}
     />
   );
 }
