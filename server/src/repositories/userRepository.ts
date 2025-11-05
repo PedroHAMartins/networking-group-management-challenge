@@ -15,7 +15,9 @@ export class UserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const row = await this.db.get(`SELECT * FROM users WHERE email = ?`, [email]);
+    const row = await this.db.get(`SELECT * FROM users WHERE email = ?`, [
+      email,
+    ]);
     return row ?? null;
   }
 }
