@@ -1,0 +1,29 @@
+#node_modules
+client/node_modules
+server/node_modules
+
+#environment
+*.env
+client/.env
+server/.env
+
+#logs
+*.log
+client/.next
+server/dist
+
+
+#next builds
+client/.next/
+
+#npm cache
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+#node temp builds
+server/.tmp/
+client/.tmp/
+
+#next packages
+client/out/
