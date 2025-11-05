@@ -1,5 +1,4 @@
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label, RadioGroup, RadioGroupItem } from "@/presentation/ui";
 
 interface Props {
   options: {

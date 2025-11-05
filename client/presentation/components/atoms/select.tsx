@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/presentation/ui";
 import { ControllerFieldState } from "react-hook-form";
 
 interface Props {
