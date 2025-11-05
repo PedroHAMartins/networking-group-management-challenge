@@ -1,3 +1,7 @@
+"use client";
+
+import { FormComponent } from "./components/form";
+
 export default function PublicFormPage() {
-  return <div></div>;
+  return <FormComponent />;
 }
