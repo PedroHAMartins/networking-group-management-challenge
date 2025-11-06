@@ -30,6 +30,7 @@ export type FieldConfig<
   defaultValue?: string | number | readonly string[] | boolean;
   type?: FieldType;
   options?: Option[];
+  isPassword?: boolean;
 };
 
 export type Fields<FormInput> = FieldConfig<
@@ -98,6 +99,7 @@ export function FormBuilder<TSchema extends ZodObject<ZodRawShape>>({
                 fieldState={fieldState}
                 type={fieldConfig.type}
                 options={fieldConfig.options}
+                isPassword={fieldConfig.isPassword}
                 onChange={(val) => {
                   field.onChange(val);
                   onChange?.(String(fieldConfig.name), val);

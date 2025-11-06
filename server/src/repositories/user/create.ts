@@ -9,9 +9,9 @@ export async function createUser(db: Db, data: CreateUserDTO): Promise<User> {
   const permissions = data.permissions
     ? JSON.stringify(data.permissions)
     : null;
-  const active = data.active ? 1 : 0;
-  const admitted = data.admitted ? 1 : 0;
   const status = "PENDING";
+  const active = false;
+  const admitted = false;
 
   await db.run(
     `INSERT INTO users (id, created_at, updated_at, role, permissions, email, password, active, admitted, name, company, purpose, referrals, token, gender, city, state, country, birthdate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,

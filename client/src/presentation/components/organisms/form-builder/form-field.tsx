@@ -26,6 +26,7 @@ interface Props<
   field: ControllerRenderProps<TFieldValues, TName>;
   fieldState: ControllerFieldState;
   type?: "text" | "radio" | "select" | "checkbox";
+  isPassword?: boolean;
   onChange?: (value: unknown) => void;
   options?: {
     label: string;
@@ -43,6 +44,7 @@ export function FormField<
   field,
   fieldState,
   type = "text",
+  isPassword,
   options,
   onChange,
 }: Props<TFieldValues, TName>) {
@@ -60,6 +62,7 @@ export function FormField<
             }}
             aria-invalid={fieldState.invalid}
             placeholder={placeholder}
+            type={isPassword ? "password" : "text"}
           />
         );
       case "checkbox":
@@ -105,7 +108,17 @@ export function FormField<
       default:
         return null;
     }
-  }, [type, fieldId, field, fieldState, placeholder, label, options, onChange]);
+  }, [
+    type,
+    fieldId,
+    field,
+    fieldState,
+    placeholder,
+    isPassword,
+    label,
+    options,
+    onChange,
+  ]);
 
   return (
     <Field>
