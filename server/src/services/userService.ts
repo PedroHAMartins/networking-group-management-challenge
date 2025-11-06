@@ -73,4 +73,8 @@ export class UserService {
   async getAllUsers(): Promise<GetUserDto[]> {
     return this.repo.getAllUsers();
   }
+
+  async getAllIntentions(): Promise<GetUserDto[]> {
+    return this.repo.getAllIntentions();
+  }
 }

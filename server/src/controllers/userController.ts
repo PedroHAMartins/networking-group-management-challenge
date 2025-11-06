@@ -47,5 +47,13 @@ export function makeUserController(service: UserService) {
         return res.status(400).json({ error: err.message || String(err) });
       }
     },
+    async getAllIntentions(req: Request, res: Response) {
+      try {
+        const users = await service.getAllIntentions();
+        return res.status(200).json(users);
+      } catch (err: any) {
+        return res.status(400).json({ error: err.message || String(err) });
+      }
+    },
   };
 }

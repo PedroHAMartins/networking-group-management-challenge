@@ -1,16 +1,17 @@
 import { Column, Button, Modal } from "@/presentation";
+import type { GetUserDto } from "../../../../../domain/user/dtos/get-user.dto";
 
 interface Props {
   open: boolean;
   setOpen: (value: boolean) => void;
-  onSubmit: (value: boolean, row?: Record<string, unknown>) => void;
+  onSubmit: (value: boolean, row?: GetUserDto) => void;
 }
 
 export function columns({
   open,
   setOpen,
   onSubmit,
-}: Props): Column<Record<string, unknown>>[] {
+}: Props): Column<GetUserDto>[] {
   return [
     {
       key: "name",

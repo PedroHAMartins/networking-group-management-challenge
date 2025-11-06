@@ -21,14 +21,14 @@ export type Column<T> = {
 interface Props<T> {
   caption?: string;
   columns: Column<T>[];
-  data: T[];
+  data?: T[];
   rowKey?: (row: T, index: number) => string | number;
 }
 
 export function TableComponent<T>({
   caption,
   columns,
-  data,
+  data = [],
   rowKey,
 }: Props<T>) {
   return (
