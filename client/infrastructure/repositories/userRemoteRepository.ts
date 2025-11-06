@@ -29,6 +29,17 @@ export class UserRemoteRepository {
     }
     return res.data as GetAllUsersDto;
   }
+
+  async approveUser(id: string, approved: boolean): Promise<User> {
+    const res = await this.client.put<User>(`/users/approve/${id}`, {
+      id,
+      approved,
+    });
+    if (!res.ok) {
+      throw new Error(res.error?.message || `Request failed (${res.status})`);
+    }
+    return res.data as User;
+  }
 }
 
 export function makeUserRemoteRepository(baseUrl: string) {

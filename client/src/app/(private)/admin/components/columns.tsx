@@ -4,7 +4,7 @@ import type { GetUserDto } from "../../../../../domain/user/dtos/get-user.dto";
 interface Props {
   open: boolean;
   setOpen: (value: boolean) => void;
-  onSubmit: (value: boolean, row?: GetUserDto) => void;
+  onSubmit: (approved: boolean, row?: GetUserDto) => void;
 }
 
 export function columns({
