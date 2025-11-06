@@ -7,17 +7,19 @@ import z from "zod";
 import { schema } from "./components/schema";
 import { makeCreateUserUseCase } from "../../../../application/users/createUserUseCase";
 import { CreateUserDTO } from "../../../../domain/user/dtos/create-user.dto";
+import { Typography } from "@/presentation";
 
 export default function PublicFormPage() {
   const [data, setData] = useState<z.infer<typeof schema> | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { setHeader } = useHeader();
+  const { setHeader, setShowBackButton } = useHeader();
 
   useEffect(() => {
     setHeader("Formulário de intenção");
-  }, [setHeader]);
+    setShowBackButton(true);
+  }, [setHeader, setShowBackButton]);
 
   const useCaseRef = useRef(makeCreateUserUseCase());
 
@@ -50,10 +52,6 @@ export default function PublicFormPage() {
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <FormComponent onSubmit={handleSubmit} onChange={setData} data={data} />
-      {loading && <div className="fixed bottom-4 right-4">Enviando...</div>}
-      {error && (
-        <div className="fixed bottom-4 left-4 text-red-500">{error}</div>
-      )}
     </div>
   );
 }

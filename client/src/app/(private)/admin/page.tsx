@@ -12,11 +12,12 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const adminPasswordKey = process.env.NEXT_PUBLIC_ADMIN_PASSWORD_KEY;
 
-  const { setHeader } = useHeader();
+  const { setHeader, setShowBackButton } = useHeader();
 
   useEffect(() => {
     setHeader("Administrativo");
-  }, [setHeader]);
+    setShowBackButton(true);
+  }, [setHeader, setShowBackButton]);
 
   const useCaseRef = useRef(makeIsVariableValidUseCase());
 
@@ -46,20 +47,15 @@ export default function AdminPage() {
   );
 
   return (
-    <div className="p-4">
+    <div className="flex justify-center items-center">
       {!visible && (
-        <div className="max-w-sm">
+        <div className="w-screen h-[calc(100dvh-100px)] flex justify-center items-center">
           <FormBuilder
             fields={fields}
             formSchema={schema}
             onSubmit={handleSubmit}
+            className="w-[20%]"
           />
-          {loading && (
-            <div className="text-sm text-muted-foreground mt-2">
-              Validando...
-            </div>
-          )}
-          {error && <div className="text-sm text-red-500 mt-2">{error}</div>}
         </div>
       )}
       {visible && <IntentionsTable />}
