@@ -24,8 +24,8 @@ export async function initDb() {
         permissions TEXT,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-        active INTEGER DEFAULT 1,
-        admitted INTEGER DEFAULT 0,
+        active BOOLEAN DEFAULT 0,
+        admitted BOOLEAN DEFAULT 0,
         name TEXT,
         company TEXT,
         purpose TEXT,
@@ -48,11 +48,16 @@ export async function initDb() {
   `);
 
   const adminPassword = process.env.ADMIN_PASSWORD;
-  const encryptedPassword = await bcrypt.hash(adminPassword, 10);
+  if (adminPassword) {
+    const encryptedPassword = await bcrypt.hash(adminPassword, 10);
 
-  await db.exec(`
-      INSERT INTO variables (key, value) VALUES ('admin_password', '${encryptedPassword}')
+    // Only insert if the key doesn't exist
+    await db.exec(`
+      INSERT INTO variables (key, value) 
+      SELECT 'admin_password', '${encryptedPassword}'
+      WHERE NOT EXISTS (SELECT 1 FROM variables WHERE key = 'admin_password')
     `);
+  }
 
   return db;
 }
