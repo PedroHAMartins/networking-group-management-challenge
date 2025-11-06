@@ -36,7 +36,7 @@ export default function AdminPage() {
           setVisible(true);
           makeNotification({
             title: "Sucesso!",
-            description: "Senha validada com sucesso",
+            description: "Login realizado com sucesso",
             type: "success",
             duration: 3000,
           });
