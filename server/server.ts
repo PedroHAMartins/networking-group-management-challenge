@@ -1,6 +1,9 @@
 import { createApp } from "./src/app";
+import dotenv from "dotenv";
 
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+dotenv.config();
+
+const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 
 async function main() {
   const { app } = await createApp();

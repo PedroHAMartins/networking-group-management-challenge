@@ -15,8 +15,8 @@ export class UserRepository {
     return updateUser(this.db, id, data);
   }
 
-  async approveUser(id: string): Promise<void> {
-    return approveUser(this.db, id);
+  async approveUser(id: string, token: string): Promise<void> {
+    return approveUser(this.db, id, token);
   }
 
   async findByEmail(email: string): Promise<User | null> {

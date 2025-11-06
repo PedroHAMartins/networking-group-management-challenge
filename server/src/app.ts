@@ -8,10 +8,8 @@ export async function createApp() {
 
   app.use(express.json());
 
-  // Mount API under /api
   app.use("/api", userRouter(db as Db));
 
-  // Health-check
   app.get("/health", (req, res) => res.json({ ok: true }));
 
   return { app, db } as { app: express.Express; db: Db };

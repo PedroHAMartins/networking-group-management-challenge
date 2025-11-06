@@ -1,5 +1,9 @@
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export async function initDb() {
   const db = await open({
@@ -34,6 +38,21 @@ export async function initDb() {
         birthdate TEXT
       )
     `);
+
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS variables (
+      key TEXT PRIMARY KEY,
+      value TEXT
+    )
+  `);
+
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  const encryptedPassword = await bcrypt.hash(adminPassword, 10);
+
+  await db.exec(`
+      INSERT INTO variables (key, value) VALUES ('admin_password', '${encryptedPassword}')
+    `);
+
   return db;
 }
 
