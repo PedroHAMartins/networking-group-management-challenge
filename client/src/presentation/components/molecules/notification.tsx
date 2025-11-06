@@ -50,7 +50,7 @@ export function Notification({
   }, [type]);
 
   return (
-    <Alert className="relative grid w-full max-w-xl items-start gap-4 pr-12">
+    <Alert className="grid w-full items-start gap-4 pr-12 fixed top-4 right-4 z-50 max-w-md">
       {icon}
       <AlertTitle className={cn("font-semibold", textColor, className)}>
         {title}

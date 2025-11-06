@@ -61,15 +61,13 @@ export function NotificationProvider({
     >
       {children}
       {notification && (
-        <div className="fixed top-4 right-4 z-50 max-w-md">
-          <Notification
-            title={notification.title}
-            description={notification.description}
-            type={notification.type}
-            className={notification.className}
-            onClose={clearNotification}
-          />
-        </div>
+        <Notification
+          title={notification.title}
+          description={notification.description}
+          type={notification.type}
+          className={notification.className}
+          onClose={clearNotification}
+        />
       )}
     </NotificationContext.Provider>
   );
