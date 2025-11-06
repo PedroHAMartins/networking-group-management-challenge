@@ -15,4 +15,5 @@ export interface CreateUserDTO {
   state?: string;
   country?: string;
   birthdate?: string;
+  status?: string;
 }

@@ -11,9 +11,10 @@ export async function createUser(db: Db, data: CreateUserDTO): Promise<User> {
     : null;
   const active = data.active ? 1 : 0;
   const admitted = data.admitted ? 1 : 0;
+  const status = "PENDING";
 
   await db.run(
-    `INSERT INTO users (id, created_at, updated_at, role, permissions, email, password, active, admitted, name, company, purpose, referrals, token, gender, city, state, country, birthdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO users (id, created_at, updated_at, role, permissions, email, password, active, admitted, name, company, purpose, referrals, token, gender, city, state, country, birthdate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id,
       now,
@@ -34,6 +35,7 @@ export async function createUser(db: Db, data: CreateUserDTO): Promise<User> {
       data.state ?? null,
       data.country ?? null,
       data.birthdate ?? null,
+      status,
     ]
   );
 
@@ -57,6 +59,7 @@ export async function createUser(db: Db, data: CreateUserDTO): Promise<User> {
     state: data.state,
     country: data.country,
     birthdate: data.birthdate,
+    status,
   };
 
   return created;

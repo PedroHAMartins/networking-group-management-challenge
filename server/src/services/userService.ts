@@ -1,5 +1,5 @@
 import { handleTokenGeneration } from "../helpers";
-import { ApproveUserDTO, CreateUserDTO, User } from "../models";
+import { ApproveUserDTO, CreateUserDTO, GetUserDto, User } from "../models";
 import { UserRepository } from "../repositories";
 
 export class UserService {
@@ -62,11 +62,15 @@ export class UserService {
 
     const token = handleTokenGeneration();
 
-    await this.repo.update(data.id, { admitted: true, token });
+    await this.repo.update(data.id, { admitted: data.approved, token });
     const updated = await this.repo.findById(data.id);
     if (!updated) {
       throw new Error("Failed to retrieve updated user");
     }
     return updated;
+  }
+
+  async getAllUsers(): Promise<GetUserDto[]> {
+    return this.repo.getAllUsers();
   }
 }

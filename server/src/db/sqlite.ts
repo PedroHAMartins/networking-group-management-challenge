@@ -35,7 +35,8 @@ export async function initDb() {
         city TEXT,
         state TEXT,
         country TEXT,
-        birthdate TEXT
+        birthdate TEXT,
+        status TEXT
       )
     `);
 

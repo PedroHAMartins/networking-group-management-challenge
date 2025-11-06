@@ -22,6 +22,7 @@ function mapUserFromRow(row: any): User {
     state: row.state,
     country: row.country,
     birthdate: row.birthdate,
+    status: row.status,
   } as User;
 }
 

@@ -1,9 +1,13 @@
-export interface UpdateUserDTO {
-  name?: string;
+export interface GetUserDto {
+  id: string;
+  created_at?: string;
+  updated_at?: string;
   role?: string;
   permissions?: string[];
+  email: string;
   active?: boolean;
   admitted?: boolean;
+  name?: string;
   company?: string;
   purpose?: string;
   referrals?: number;

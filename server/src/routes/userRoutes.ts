@@ -12,8 +12,11 @@ export function userRouter(db: Db) {
   const router = express.Router();
 
   router.post("/users", controller.create);
+
   router.put("/users/approve/:id", controller.approve);
   router.put("/users/:id", controller.update);
+
+  router.get("/users", controller.getAllUsers);
 
   return router;
 }

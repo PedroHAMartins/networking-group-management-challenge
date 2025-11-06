@@ -1,8 +1,9 @@
 import { Db } from "../../db/sqlite";
-import { CreateUserDTO, User } from "../../models";
+import { CreateUserDTO, GetUserDto, User } from "../../models";
 import { createUser } from "./create";
-import { updateUser, approveUser } from "./update";
+import { updateUser } from "./update";
 import { findUserByEmail, findUserById, findUserByToken } from "./find";
+import { getAllUsers } from "./get";
 
 export class UserRepository {
   constructor(private db: Db) {}
@@ -15,10 +16,6 @@ export class UserRepository {
     return updateUser(this.db, id, data);
   }
 
-  async approveUser(id: string, token: string): Promise<void> {
-    return approveUser(this.db, id, token);
-  }
-
   async findByEmail(email: string): Promise<User | null> {
     return findUserByEmail(this.db, email);
   }
@@ -29,5 +26,9 @@ export class UserRepository {
 
   async findByToken(token: string): Promise<User | null> {
     return findUserByToken(this.db, token);
+  }
+
+  async getAllUsers(): Promise<GetUserDto[]> {
+    return getAllUsers(this.db);
   }
 }

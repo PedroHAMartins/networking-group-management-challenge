@@ -29,15 +29,3 @@ export async function updateUser(
     [...values, now, id]
   );
 }
-
-export async function approveUser(
-  db: Db,
-  id: string,
-  token: string
-): Promise<void> {
-  const now = new Date().toISOString();
-  await db.run(
-    `UPDATE users SET admitted = TRUE, token = ?, updated_at = ? WHERE id = ?`,
-    [token, now, id]
-  );
-}
