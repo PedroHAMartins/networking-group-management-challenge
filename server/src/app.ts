@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { initDb, Db } from "./db/sqlite";
 import { userRouter } from "./routes/userRoutes";
+import { variablesRouter } from "./routes/variablesRoutes";
 
 export async function createApp() {
   const db = await initDb();
@@ -19,6 +20,7 @@ export async function createApp() {
   app.use(express.json());
 
   app.use("/api", userRouter(db as Db));
+  app.use("/api", variablesRouter(db as Db));
 
   app.get("/health", (req, res) => res.json({ ok: true }));
 

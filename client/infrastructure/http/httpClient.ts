@@ -22,7 +22,11 @@ export class HttpClient {
     path: string,
     query?: Record<string, string | number | boolean>
   ) {
-    const url = new URL(path, this.baseUrl || window?.location?.origin || "");
+    const base = this.baseUrl || window?.location?.origin || "";
+    const normalizedBase = base.endsWith("/") ? base : base + "/";
+    const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+
+    const url = new URL(normalizedPath, normalizedBase);
     if (query) {
       Object.entries(query).forEach(([k, v]) =>
         url.searchParams.set(k, String(v))
@@ -56,7 +60,7 @@ export class HttpClient {
       let data: unknown = undefined;
       try {
         data = text ? JSON.parse(text) : undefined;
-      } catch (e) {
+      } catch {
         data = text;
       }
 

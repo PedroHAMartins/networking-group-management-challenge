@@ -9,4 +9,11 @@ export class VariablesRepository {
     ]);
     return row ? row.value : null;
   }
+
+  async isVariableValid(key: string): Promise<boolean> {
+    const row = await this.db.get(`SELECT * FROM variables WHERE key = ?`, [
+      key,
+    ]);
+    return !!row;
+  }
 }
