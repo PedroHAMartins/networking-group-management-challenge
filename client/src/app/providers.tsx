@@ -1,7 +1,11 @@
 "use client";
 
-import { HeaderProvider } from "shared";
+import { HeaderProvider, NotificationProvider } from "shared";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <HeaderProvider>{children}</HeaderProvider>;
+  return (
+    <NotificationProvider>
+      <HeaderProvider>{children}</HeaderProvider>
+    </NotificationProvider>
+  );
 }

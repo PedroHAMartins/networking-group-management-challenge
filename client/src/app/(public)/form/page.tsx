@@ -1,32 +1,58 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useHeader } from "shared";
+import { useCallback, useEffect, useState } from "react";
+import { useHeader, useNotification } from "shared";
 import { FormComponent } from "./components/form";
 import z from "zod";
 import { schema } from "./components/schema";
-import { makeCreateUserUseCase } from "../../../../application/users/createUserUseCase";
+import {
+  CreateUserUseCase,
+  makeCreateUserUseCase,
+} from "../../../../application/users/createUserUseCase";
 import { CreateUserDTO } from "../../../../domain/user/dtos/create-user.dto";
-import { Typography } from "@/presentation";
+import { useUseCase } from "shared/hooks";
 
 export default function PublicFormPage() {
   const [data, setData] = useState<z.infer<typeof schema> | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const { setHeader, setShowBackButton } = useHeader();
+  const { makeNotification } = useNotification();
 
   useEffect(() => {
     setHeader("Formulário de intenção");
     setShowBackButton(true);
   }, [setHeader, setShowBackButton]);
 
-  const useCaseRef = useRef(makeCreateUserUseCase());
+  const { run: createUser, loading: creating } = useUseCase<
+    CreateUserUseCase,
+    unknown,
+    [CreateUserDTO]
+  >(
+    () => makeCreateUserUseCase(),
+    (uc: CreateUserUseCase, dto: CreateUserDTO) => uc.execute(dto),
+    {
+      onSuccess: () => {
+        setData(null);
+        makeNotification({
+          title: "Sucesso!",
+          description: "Usuário criado com sucesso",
+          type: "success",
+          duration: 4000,
+        });
+      },
+      onError: (err: Error) => {
+        makeNotification({
+          title: "Erro ao criar usuário",
+          description: err.message,
+          type: "error",
+          duration: 5000,
+        });
+      },
+    }
+  );
 
-  const handleSubmit = useCallback(async (formData: z.infer<typeof schema>) => {
-    setError(null);
-    setLoading(true);
-    try {
+  const handleSubmit = useCallback(
+    async (formData: z.infer<typeof schema>) => {
       const dto: CreateUserDTO = {
         email: formData.email,
         password: "password",
@@ -34,24 +60,15 @@ export default function PublicFormPage() {
         company: formData.company,
         purpose: formData.purpose,
       };
-
-      const created = await useCaseRef.current.execute(dto);
-      console.log("User created:", created);
-      setData(null);
-      alert("Usuário criado com sucesso");
-    } catch (err: unknown) {
-      console.error(err);
-      const message = err instanceof Error ? err.message : String(err);
-      setError(message);
-      alert("Falha ao criar usuário: " + message);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      await createUser(dto);
+    },
+    [createUser]
+  );
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <FormComponent onSubmit={handleSubmit} onChange={setData} data={data} />
+      {creating && <div className="fixed bottom-4 left-4">Enviando...</div>}
     </div>
   );
 }
