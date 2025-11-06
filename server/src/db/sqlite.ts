@@ -7,16 +7,33 @@ export async function initDb() {
     driver: sqlite3.Database,
   });
 
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL UNIQUE,
-      password TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
+  // Enable foreign key constraints
+  await db.exec(`PRAGMA foreign_keys = ON;`);
 
+  // Users table (id as UUID string)
+  await db.exec(`
+      CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME,
+        role TEXT,
+        permissions TEXT,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        active INTEGER DEFAULT 1,
+        admitted INTEGER DEFAULT 0,
+        name TEXT,
+        company TEXT,
+        purpose TEXT,
+        referrals INTEGER DEFAULT 0,
+        token TEXT,
+        gender TEXT,
+        city TEXT,
+        state TEXT,
+        country TEXT,
+        birthdate TEXT
+      )
+    `);
   return db;
 }
 
