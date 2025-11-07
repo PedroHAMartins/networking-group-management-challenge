@@ -31,11 +31,16 @@ export function makeUserController(service: UserService) {
     async update(req: Request, res: Response) {
       try {
         const id = req.params.id as string;
-        const token = req.params.token as string;
-        const payload = req.body as UpdateUserDTO;
+        const { token, ...payload } = req.body as UpdateUserDTO & {
+          token: string;
+        };
+
+        console.log("Update request:", { id, token, payload });
+
         const updated = await service.updateUser(id, token, payload);
         return res.status(200).json(updated);
       } catch (err: any) {
+        console.error("Update error:", err.message);
         return res.status(400).json({ error: err.message || String(err) });
       }
     },

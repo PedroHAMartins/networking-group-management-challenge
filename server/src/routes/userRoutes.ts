@@ -12,13 +12,13 @@ export function userRouter(db: Db) {
   const router = express.Router();
 
   router.post("/users", controller.create);
+  router.post("/users/token", controller.findUserByToken);
 
   router.put("/users/approve/:id", controller.approve);
   router.put("/users/:id", controller.update);
 
   router.get("/users/intentions", controller.getAllIntentions);
   router.get("/users", controller.getAllUsers);
-  router.get("/users/token", controller.findUserByToken);
 
   return router;
 }
