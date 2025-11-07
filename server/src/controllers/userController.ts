@@ -31,11 +31,16 @@ export function makeUserController(service: UserService) {
     async update(req: Request, res: Response) {
       try {
         const id = req.params.id as string;
-        const token = req.params.token as string;
-        const payload = req.body as UpdateUserDTO;
+        const { token, ...payload } = req.body as UpdateUserDTO & {
+          token: string;
+        };
+
+        console.log("Update request:", { id, token, payload });
+
         const updated = await service.updateUser(id, token, payload);
         return res.status(200).json(updated);
       } catch (err: any) {
+        console.error("Update error:", err.message);
         return res.status(400).json({ error: err.message || String(err) });
       }
     },
@@ -51,6 +56,15 @@ export function makeUserController(service: UserService) {
       try {
         const users = await service.getAllIntentions();
         return res.status(200).json(users);
+      } catch (err: any) {
+        return res.status(400).json({ error: err.message || String(err) });
+      }
+    },
+    async findUserByToken(req: Request, res: Response) {
+      try {
+        const token = req.body.token as string;
+        const user = await service.findByToken(token);
+        return res.status(200).json(user);
       } catch (err: any) {
         return res.status(400).json({ error: err.message || String(err) });
       }

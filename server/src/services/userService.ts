@@ -19,7 +19,20 @@ export class UserService {
       throw new Error("Invalid token");
     }
 
-    await this.repo.update(id, data);
+    // Remove fields that shouldn't be updated through this endpoint
+    const {
+      email,
+      password,
+      role,
+      permissions,
+      active,
+      admitted,
+      referrals,
+      status,
+      ...allowedData
+    } = data;
+
+    await this.repo.update(id, allowedData);
     const updated = await this.repo.findById(id);
     if (!updated) {
       throw new Error("Failed to retrieve updated user");
@@ -94,5 +107,9 @@ export class UserService {
 
   async getAllIntentions(): Promise<GetUserDto[]> {
     return this.repo.getAllIntentions();
+  }
+
+  async findByToken(token: string): Promise<User | null> {
+    return this.repo.findByToken(token);
   }
 }

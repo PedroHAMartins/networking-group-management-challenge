@@ -4,6 +4,7 @@ export * from "./checkbox";
 export * from "./dialog";
 export * from "./drawer";
 export * from "./field";
+export * from "./input-otp";
 export * from "./input";
 export * from "./label";
 export * from "./radio-group";
