@@ -18,6 +18,7 @@ export function userRouter(db: Db) {
 
   router.get("/users/intentions", controller.getAllIntentions);
   router.get("/users", controller.getAllUsers);
+  router.get("/users/token", controller.findUserByToken);
 
   return router;
 }

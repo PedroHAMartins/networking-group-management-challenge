@@ -55,5 +55,14 @@ export function makeUserController(service: UserService) {
         return res.status(400).json({ error: err.message || String(err) });
       }
     },
+    async findUserByToken(req: Request, res: Response) {
+      try {
+        const token = req.body.token as string;
+        const user = await service.findByToken(token);
+        return res.status(200).json(user);
+      } catch (err: any) {
+        return res.status(400).json({ error: err.message || String(err) });
+      }
+    },
   };
 }

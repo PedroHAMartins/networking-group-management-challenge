@@ -95,4 +95,8 @@ export class UserService {
   async getAllIntentions(): Promise<GetUserDto[]> {
     return this.repo.getAllIntentions();
   }
+
+  async findByToken(token: string): Promise<User | null> {
+    return this.repo.findByToken(token);
+  }
 }
