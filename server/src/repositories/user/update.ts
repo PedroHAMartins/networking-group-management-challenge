@@ -6,26 +6,48 @@ export async function updateUser(
   id: string,
   data: Partial<User>
 ): Promise<void> {
-  const fields: string[] = [];
-  const values: any[] = [];
-  const now = new Date().toISOString();
+  const sets: string[] = ["updated_at = $updated_at"];
+  const params: Record<string, unknown> = {
+    $updated_at: new Date().toISOString(),
+    $id: id,
+  };
 
-  Object.entries(data).forEach(([key, value]) => {
-    fields.push(`${key} = ?`);
-    if (key === "permissions" && value !== undefined) {
-      values.push(JSON.stringify(value));
-    } else if (
-      (key === "active" || key === "admitted") &&
-      value !== undefined
-    ) {
-      values.push(value ? 1 : 0);
-    } else {
-      values.push(value);
+  for (const [key, raw] of Object.entries(data)) {
+    const paramKey = `$${key}`;
+    sets.push(`${key} = ${paramKey}`);
+    let value: unknown = raw;
+    if (key === "permissions" && raw !== undefined) {
+      value = JSON.stringify(raw);
+    } else if ((key === "active" || key === "admitted") && raw !== undefined) {
+      value = raw ? 1 : 0;
     }
-  });
+    params[paramKey] = value as unknown;
+  }
 
-  await db.run(
-    `UPDATE users SET updated_at = ?, ${fields.join(", ")} WHERE id = ?`,
-    [...values, now, id]
-  );
+  const sql = `UPDATE users SET ${sets.join(", ")} WHERE id = $id`;
+  await db.run(sql, params);
+}
+
+export async function updateUserOnApprove(
+  db: Db,
+  id: string,
+  data: Partial<User>
+): Promise<void> {
+  const now = new Date().toISOString();
+  const sql = `
+    UPDATE users
+    SET updated_at = ?,
+        admitted = ?,
+        token = ?,
+        status = ?
+    WHERE id = ?
+  `;
+
+  await db.run(sql, [
+    now,
+    data.admitted ? 1 : 0,
+    data.token || null,
+    data.status || null,
+    id,
+  ]);
 }

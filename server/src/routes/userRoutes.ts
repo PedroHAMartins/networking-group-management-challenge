@@ -16,6 +16,7 @@ export function userRouter(db: Db) {
   router.put("/users/approve/:id", controller.approve);
   router.put("/users/:id", controller.update);
 
+  router.get("/users/intentions", controller.getAllIntentions);
   router.get("/users", controller.getAllUsers);
 
   return router;

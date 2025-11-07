@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useHeader, useNotification } from "shared";
 import { fields, IntentionsTable, schema } from "./components";
 import { FormBuilder } from "@/presentation";
+import Link from "next/link";
 import {
   IsVariableValidUseCase,
   makeIsVariableValidUseCase,
@@ -14,13 +15,35 @@ export default function AdminPage() {
   const [visible, setVisible] = useState(false);
   const adminPasswordKey = process.env.NEXT_PUBLIC_ADMIN_PASSWORD_KEY;
 
-  const { setHeader, setShowBackButton } = useHeader();
+  const { setHeader, setShowBackButton, setShowMenu, setMenuItems } =
+    useHeader();
   const { makeNotification } = useNotification();
+
+  const menuContent = useMemo(() => {
+    return (
+      <nav className="flex flex-col gap-2">
+        <Link
+          href="/admin/dashboard"
+          className="px-4 py-2 rounded hover:bg-accent transition-colors"
+        >
+          Dashboard
+        </Link>
+        <Link
+          href="/admin"
+          className="px-4 py-2 rounded hover:bg-accent transition-colors"
+        >
+          Intenções
+        </Link>
+      </nav>
+    );
+  }, []);
 
   useEffect(() => {
     setHeader("Administrativo");
     setShowBackButton(true);
-  }, [setHeader, setShowBackButton]);
+    setShowMenu(true);
+    setMenuItems(menuContent);
+  }, [setHeader, setShowBackButton, setShowMenu, setMenuItems, menuContent]);
 
   const { run: validate, loading } = useUseCase<
     IsVariableValidUseCase,
