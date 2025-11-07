@@ -60,9 +60,27 @@ export class UserService {
       throw new Error("User is already admitted");
     }
 
-    const token = handleTokenGeneration();
+    if (user.status !== "PENDING") {
+      throw new Error("User is not in pending status");
+    }
 
-    await this.repo.update(data.id, { admitted: data.approved, token });
+    if (!data.approved) {
+      await this.repo.updateOnApprove(data.id, {
+        admitted: false,
+        token: null,
+        status: "REJECTED",
+      });
+      const rejected = await this.repo.findById(data.id);
+      if (!rejected) throw new Error("Failed to retrieve updated user");
+      return rejected;
+    }
+
+    const token = handleTokenGeneration();
+    await this.repo.updateOnApprove(data.id, {
+      admitted: true,
+      token,
+      status: "APPROVED",
+    });
     const updated = await this.repo.findById(data.id);
     if (!updated) {
       throw new Error("Failed to retrieve updated user");

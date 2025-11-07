@@ -1,7 +1,7 @@
 import { Db } from "../../db/sqlite";
 import { CreateUserDTO, GetUserDto, User } from "../../models";
 import { createUser } from "./create";
-import { updateUser } from "./update";
+import { updateUser, updateUserOnApprove } from "./update";
 import { findUserByEmail, findUserById, findUserByToken } from "./find";
 import { getAllIntentions, getAllUsers } from "./get";
 
@@ -14,6 +14,10 @@ export class UserRepository {
 
   async update(id: string, data: Partial<User>): Promise<void> {
     return updateUser(this.db, id, data);
+  }
+
+  async updateOnApprove(id: string, data: Partial<User>): Promise<void> {
+    return updateUserOnApprove(this.db, id, data);
   }
 
   async findByEmail(email: string): Promise<User | null> {
