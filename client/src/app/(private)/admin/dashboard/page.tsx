@@ -9,7 +9,7 @@ import { Cards, Chart } from "./components";
 import {
   GetTotalUsersDataUseCase,
   makeGetTotalUsersDataUseCase,
-} from "application/users/getTotalUsersDataUseCase";
+} from "application/users/get-total-users-data.usecase";
 import { TotalUsersDataDto } from "domain/user/dtos/data.dto";
 
 export default function DashboardPage() {

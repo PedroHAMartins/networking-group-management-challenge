@@ -1,4 +1,4 @@
-import { HttpClient } from "../http/httpClient";
+import { HttpClient } from "../http/http-client";
 import { CreateUserDTO } from "../../domain/user/dtos/create-user.dto";
 import { UpdateUserDTO } from "../../domain/user/dtos/update-user.dto";
 import { GetAllUsersDto } from "../../domain/user/dtos/get-user.dto";

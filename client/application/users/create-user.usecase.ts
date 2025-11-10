@@ -2,7 +2,7 @@ import { CreateUserDTO } from "../../domain/user/dtos/create-user.dto";
 import {
   UserRemoteRepository,
   makeUserRemoteRepository,
-} from "../../infrastructure/repositories/userRemoteRepository";
+} from "../../infrastructure/repositories/user.repository";
 
 export class CreateUserUseCase {
   constructor(private repo: UserRemoteRepository) {}

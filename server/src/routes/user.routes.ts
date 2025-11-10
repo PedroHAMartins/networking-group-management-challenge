@@ -1,6 +1,6 @@
 import express from "express";
-import { makeUserController } from "../controllers/userController";
-import { UserService } from "../services/userService";
+import { makeUserController } from "../controllers/user.controller";
+import { UserService } from "../services/user.service";
 import { Db } from "../db/sqlite";
 import { UserRepository } from "../repositories";
 

@@ -6,11 +6,11 @@ import { useUseCase } from "shared/hooks";
 import {
   GetAllIntentionsUseCase,
   makeGetAllIntentionsUseCase,
-} from "application/users/getAllIntentionsUseCase";
+} from "application/users/get-all-intentions.usecase";
 import {
   ApproveUserUseCase,
   makeApproveUserUseCase,
-} from "application/users/approveUserUseCase";
+} from "application/users/approve-user.usecase";
 import type { GetUserDto } from "../../../../../domain/user/dtos/get-user.dto";
 import { useNotification } from "shared";
 

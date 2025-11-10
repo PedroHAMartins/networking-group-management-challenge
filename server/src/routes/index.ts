@@ -1,2 +1,2 @@
-export * from "./userRoutes";
-export * from "./variablesRoutes";
+export * from "./user.routes";
+export * from "./variables.routes";

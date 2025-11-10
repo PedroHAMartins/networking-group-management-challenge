@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { VariablesService } from "../services/variableService";
+import { VariablesService } from "../services/variables.service";
 
 export function makeVariablesController(service: VariablesService) {
   return {

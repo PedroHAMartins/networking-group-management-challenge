@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/userService";
+import { UserService } from "../services/user.service";
 import { ApproveUserDTO, CreateUserDTO, UpdateUserDTO, User } from "../models";
 
 export function makeUserController(service: UserService) {

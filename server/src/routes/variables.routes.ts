@@ -1,8 +1,8 @@
 import express from "express";
-import { makeVariablesController } from "../controllers/variablesController";
+import { makeVariablesController } from "../controllers/variables.controller";
 import { Db } from "../db/sqlite";
 import { VariablesRepository } from "../repositories";
-import { VariablesService } from "../services/variableService";
+import { VariablesService } from "../services/variables.service";
 
 export function variablesRouter(db: Db) {
   // eslint-disable-next-line no-console
