@@ -78,7 +78,7 @@ This application provides a complete workflow for managing user intentions to jo
 - **Testing**: Jest + Supertest
 - **Development**: ts-node-dev (hot reload)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 networking-group-management-challenge/
@@ -325,9 +325,9 @@ The server follows **MVC pattern** with layered architecture:
 ### Route Order
 Express matches routes in order. Specific routes must come before parameterized routes:
 ```javascript
-router.get("/users/data", ...)        // ✅ Specific first
-router.get("/users/intentions", ...)  // ✅ Specific first
-router.get("/users", ...)              // ✅ General last
+router.get("/users/data", ...)        // Specific first
+router.get("/users/intentions", ...)  // Specific first
+router.get("/users", ...)              // General last
 ````
 
 ### SQL Parameter Binding
