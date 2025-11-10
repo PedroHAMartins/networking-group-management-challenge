@@ -19,7 +19,6 @@ export class UserService {
       throw new Error("Invalid token");
     }
 
-    // Remove fields that shouldn't be updated through this endpoint
     const {
       email,
       password,
@@ -107,6 +106,10 @@ export class UserService {
 
   async getAllIntentions(): Promise<GetUserDto[]> {
     return this.repo.getAllIntentions();
+  }
+
+  async getTotalUsersDatas(): Promise<{ approved: number; total: number }> {
+    return this.repo.getTotalUsersDatas();
   }
 
   async findByToken(token: string): Promise<User | null> {

@@ -56,6 +56,7 @@ export function IntentionsTable() {
   const approveOptions = useMemo(
     () => ({
       onSuccess: (updated: GetUserDto) => {
+        console.log("Token:", updated.token);
         fetchUsers();
         makeNotification({
           title: "Aprovação de usuário",

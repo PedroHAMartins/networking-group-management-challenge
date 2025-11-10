@@ -9,11 +9,9 @@ export class VariablesService {
   }
 
   async isVariableValid(key: string, value: string): Promise<boolean> {
-    // Get stored hashed value
     const stored = await this.repo.getVariable(key);
     if (!stored) return false;
     try {
-      // Compare plaintext with hash
       const match = await bcrypt.compare(value, stored);
       return match;
     } catch {

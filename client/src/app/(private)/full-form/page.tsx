@@ -85,7 +85,6 @@ export default function FullFormPage() {
     void verifyToken(token);
   }, [token, verifyToken, makeNotification, router]);
 
-  // Update user
   const updateExecute = useCallback(
     (uc: UpdateUserUseCase, id: string, token: string, dto: UpdateUserDTO) =>
       uc.execute(id, token, dto),

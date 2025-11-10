@@ -60,6 +60,14 @@ export function makeUserController(service: UserService) {
         return res.status(400).json({ error: err.message || String(err) });
       }
     },
+    async getTotalUsersDatas(req: Request, res: Response) {
+      try {
+        const users = await service.getTotalUsersDatas();
+        return res.status(200).json(users);
+      } catch (err: any) {
+        return res.status(400).json({ error: err.message || String(err) });
+      }
+    },
     async findUserByToken(req: Request, res: Response) {
       try {
         const token = req.body.token as string;

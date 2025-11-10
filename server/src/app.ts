@@ -8,7 +8,6 @@ export async function createApp() {
   const db = await initDb();
   const app = express();
 
-  // Enable CORS for development. In production, restrict origins accordingly.
   app.use(
     cors({
       origin: true,

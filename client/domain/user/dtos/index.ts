@@ -1,4 +1,5 @@
 export * from "./approve-user.dto";
 export * from "./create-user.dto";
+export * from "./data.dto";
 export * from "./get-user.dto";
 export * from "./update-user.dto";
