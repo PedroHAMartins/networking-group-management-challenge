@@ -1,7 +1,7 @@
 import {
   makeVariablesRemoteRepository,
   VariablesRemoteRepository,
-} from "infrastructure/repositories/variablesRemoteRepository";
+} from "infrastructure/repositories/variables.repository";
 
 export class IsVariableValidUseCase {
   constructor(private repo: VariablesRemoteRepository) {}

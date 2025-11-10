@@ -2,7 +2,7 @@ import { TotalUsersDataDto } from "../../domain/user/dtos/data.dto";
 import {
   UserRemoteRepository,
   makeUserRemoteRepository,
-} from "../../infrastructure/repositories/userRemoteRepository";
+} from "../../infrastructure/repositories/user.repository";
 import { DEFAULT_API_BASE } from "../../infrastructure/config";
 
 export class GetTotalUsersDataUseCase {

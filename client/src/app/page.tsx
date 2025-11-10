@@ -9,7 +9,7 @@ import { useUseCase } from "shared/hooks";
 import {
   VerifyUserTokenUseCase,
   makeVerifyUserTokenUseCase,
-} from "application/users/verifyUserTokenUseCase";
+} from "application/users/verify-user-token.usecase";
 import type { User } from "domain/user/entities/user.entity";
 
 export default function Home() {

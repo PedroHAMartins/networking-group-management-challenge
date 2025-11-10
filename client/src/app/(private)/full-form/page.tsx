@@ -11,11 +11,11 @@ import z from "zod";
 import {
   VerifyUserTokenUseCase,
   makeVerifyUserTokenUseCase,
-} from "application/users/verifyUserTokenUseCase";
+} from "application/users/verify-user-token.usecase";
 import {
   UpdateUserUseCase,
   makeUpdateUserUseCase,
-} from "application/users/updateUserUseCase";
+} from "application/users/update-user.usecase";
 import type { User } from "domain/user/entities/user.entity";
 import type { UpdateUserDTO } from "domain/user/dtos";
 

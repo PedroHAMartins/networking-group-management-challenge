@@ -1,1 +1,1 @@
-export * from "./handleTokenGeneration.helper";
+export * from "./handle-token-generation.helper";

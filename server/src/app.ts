@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { initDb, Db } from "./db/sqlite";
-import { userRouter } from "./routes/userRoutes";
-import { variablesRouter } from "./routes/variablesRoutes";
+import { userRouter } from "./routes/user.routes";
+import { variablesRouter } from "./routes/variables.routes";
 
 export async function createApp() {
   const db = await initDb();

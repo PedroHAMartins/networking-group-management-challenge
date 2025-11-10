@@ -1,2 +1,2 @@
-export * from "./userController";
-export * from "./variablesController";
+export * from "./user.controller";
+export * from "./variables.controller";

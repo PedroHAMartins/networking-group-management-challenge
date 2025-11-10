@@ -8,7 +8,7 @@ import Link from "next/link";
 import {
   IsVariableValidUseCase,
   makeIsVariableValidUseCase,
-} from "application/variables/isVariableValidUseCase";
+} from "application/variables/is-variable-valid.usecase";
 import { useUseCase } from "shared/hooks";
 
 export default function AdminPage() {

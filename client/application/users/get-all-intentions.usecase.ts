@@ -2,19 +2,21 @@ import { GetAllUsersDto } from "../../domain/user/dtos/get-user.dto";
 import {
   UserRemoteRepository,
   makeUserRemoteRepository,
-} from "../../infrastructure/repositories/userRemoteRepository";
+} from "../../infrastructure/repositories/user.repository";
 import { DEFAULT_API_BASE } from "../../infrastructure/config";
 
-export class GetAllUsersUseCase {
+export class GetAllIntentionsUseCase {
   constructor(private repo: UserRemoteRepository) {}
 
   async execute(): Promise<GetAllUsersDto> {
-    const users = await this.repo.getAllUsers();
+    const users = await this.repo.getAllIntentions();
     return users;
   }
 }
 
-export function makeGetAllUsersUseCase(baseUrl: string = DEFAULT_API_BASE) {
+export function makeGetAllIntentionsUseCase(
+  baseUrl: string = DEFAULT_API_BASE
+) {
   const repo = makeUserRemoteRepository(baseUrl);
-  return new GetAllUsersUseCase(repo as UserRemoteRepository);
+  return new GetAllIntentionsUseCase(repo as UserRemoteRepository);
 }

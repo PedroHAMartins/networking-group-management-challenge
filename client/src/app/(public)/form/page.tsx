@@ -8,7 +8,7 @@ import { schema } from "./components/schema";
 import {
   CreateUserUseCase,
   makeCreateUserUseCase,
-} from "../../../../application/users/createUserUseCase";
+} from "../../../../application/users/create-user.usecase";
 import { CreateUserDTO } from "../../../../domain/user/dtos/create-user.dto";
 import { useUseCase } from "shared/hooks";
 
