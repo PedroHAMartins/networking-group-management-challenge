@@ -11,7 +11,6 @@ A full-stack application for managing networking group member intentions and app
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
 - [Running the Application](#running-the-application)
-- [Testing](#testing)
 - [API Documentation](#api-documentation)
 - [Architecture](#architecture)
 - [Contributing](#contributing)
