@@ -13,15 +13,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/presentation/ui/chart";
-import {
-  GetTotalUsersDataUseCase,
-  makeGetTotalUsersDataUseCase,
-} from "application/users/getTotalUsersDataUseCase";
-import { TotalUsersDataDto } from "domain/user/dtos/data.dto";
 import { Users, UserCheck } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Legend } from "recharts";
-import { useNotification, useUseCase } from "shared";
 
 interface Props {
   totalUsers: number;

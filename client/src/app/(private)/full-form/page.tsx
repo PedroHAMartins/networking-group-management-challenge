@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useHeader, useNotification } from "shared";
 import { useUseCase } from "shared/hooks";
@@ -19,7 +19,7 @@ import {
 import type { User } from "domain/user/entities/user.entity";
 import type { UpdateUserDTO } from "domain/user/dtos";
 
-export default function FullFormPage() {
+function FullFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -161,5 +161,21 @@ export default function FullFormPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function FullFormPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="text-center">
+            <p className="text-lg">Carregando...</p>
+          </div>
+        </div>
+      }
+    >
+      <FullFormContent />
+    </Suspense>
   );
 }
