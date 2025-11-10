@@ -8,12 +8,10 @@ export class CreateUserUseCase {
   constructor(private repo: UserRemoteRepository) {}
 
   async execute(dto: CreateUserDTO) {
-    // Generic validation that could be shared across use-cases
     if (!dto.email || !dto.password) {
       throw new Error("email and password are required");
     }
 
-    // Business rules could go here (example: enforce default role)
     if (!dto.role) dto.role = "member";
 
     const created = await this.repo.createUser(dto);

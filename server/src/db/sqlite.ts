@@ -11,10 +11,8 @@ export async function initDb() {
     driver: sqlite3.Database,
   });
 
-  // Enable foreign key constraints
   await db.exec(`PRAGMA foreign_keys = ON;`);
 
-  // Users table (id as UUID string)
   await db.exec(`
       CREATE TABLE IF NOT EXISTS users (
         id TEXT PRIMARY KEY,
@@ -51,7 +49,6 @@ export async function initDb() {
   if (adminPassword) {
     const encryptedPassword = await bcrypt.hash(adminPassword, 10);
 
-    // Only insert if the key doesn't exist
     await db.exec(`
       INSERT INTO variables (key, value) 
       SELECT 'admin_password', '${encryptedPassword}'

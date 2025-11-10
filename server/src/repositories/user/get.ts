@@ -54,3 +54,17 @@ export async function getAllIntentions(db: Db): Promise<GetUserDto[]> {
     status: row.status,
   }));
 }
+
+export async function getTotalUsersDatas(
+  db: Db
+): Promise<{ approved: number; total: number }> {
+  const approved = await db.get(
+    `SELECT COUNT(*) as total FROM users WHERE status = 'APPROVED'`
+  );
+  const total = await db.get(`SELECT COUNT(*) as total FROM users`);
+  const row = {
+    approved: approved.total,
+    total: total.total,
+  };
+  return row;
+}

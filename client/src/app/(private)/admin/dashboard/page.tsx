@@ -1,12 +1,55 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
-import { useHeader } from "shared";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useHeader, useNotification, useUseCase } from "shared";
 import Link from "next/link";
+import { Typography } from "@/presentation";
+import { Cards, Chart } from "./components";
+import {
+  GetTotalUsersDataUseCase,
+  makeGetTotalUsersDataUseCase,
+} from "application/users/getTotalUsersDataUseCase";
+import { TotalUsersDataDto } from "domain/user/dtos/data.dto";
 
 export default function DashboardPage() {
   const { setHeader, setShowBackButton, setShowMenu, setMenuItems } =
     useHeader();
+
+  const [total, setTotal] = useState<number>(0);
+  const [approved, setApproved] = useState<number>(0);
+  const { makeNotification } = useNotification();
+
+  const fetchExecute = useCallback(
+    (uc: GetTotalUsersDataUseCase) => uc.execute(),
+    []
+  );
+
+  const fetchOptions = useMemo(
+    () => ({
+      onSuccess: (data: TotalUsersDataDto) => {
+        setTotal(data.total);
+        setApproved(data.approved);
+      },
+      onError: () => {
+        makeNotification({
+          title: "Erro",
+          description: "Não foi possível carregar os dados de usuários.",
+          type: "error",
+        });
+      },
+    }),
+    [setTotal, setApproved, makeNotification]
+  );
+
+  const { run: fetchData } = useUseCase<
+    GetTotalUsersDataUseCase,
+    TotalUsersDataDto,
+    []
+  >(() => makeGetTotalUsersDataUseCase(), fetchExecute, fetchOptions);
+
+  useEffect(() => {
+    void fetchData();
+  }, [fetchData]);
 
   const menuContent = useMemo(() => {
     return (
@@ -35,9 +78,12 @@ export default function DashboardPage() {
   }, [setHeader, setShowBackButton, setShowMenu, setMenuItems, menuContent]);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <p>Welcome to the admin dashboard.</p>
+    <div className="flex flex-col justify-center items-center gap-10 py-5">
+      <Typography className="px-20" type="h2" weight="bold">
+        Indicadores
+      </Typography>
+      <Cards approvedUsers={approved} />
+      <Chart totalUsers={total} approvedUsers={approved} />
     </div>
   );
 }

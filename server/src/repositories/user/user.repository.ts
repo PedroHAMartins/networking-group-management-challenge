@@ -3,7 +3,7 @@ import { CreateUserDTO, GetUserDto, User } from "../../models";
 import { createUser } from "./create";
 import { updateUser, updateUserOnApprove } from "./update";
 import { findUserByEmail, findUserById, findUserByToken } from "./find";
-import { getAllIntentions, getAllUsers } from "./get";
+import { getAllIntentions, getAllUsers, getTotalUsersDatas } from "./get";
 
 export class UserRepository {
   constructor(private db: Db) {}
@@ -38,5 +38,9 @@ export class UserRepository {
 
   async getAllIntentions(): Promise<GetUserDto[]> {
     return getAllIntentions(this.db);
+  }
+
+  async getTotalUsersDatas(): Promise<{ approved: number; total: number }> {
+    return getTotalUsersDatas(this.db);
   }
 }

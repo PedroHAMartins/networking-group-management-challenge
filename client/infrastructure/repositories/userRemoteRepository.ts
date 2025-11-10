@@ -2,6 +2,7 @@ import { HttpClient } from "../http/httpClient";
 import { CreateUserDTO } from "../../domain/user/dtos/create-user.dto";
 import { UpdateUserDTO } from "../../domain/user/dtos/update-user.dto";
 import { GetAllUsersDto } from "../../domain/user/dtos/get-user.dto";
+import { TotalUsersDataDto } from "../../domain/user/dtos/data.dto";
 import { User } from "../../domain/user/entities/user.entity";
 
 export class UserRemoteRepository {
@@ -29,6 +30,14 @@ export class UserRemoteRepository {
       throw new Error(res.error?.message || `Request failed (${res.status})`);
     }
     return res.data as GetAllUsersDto;
+  }
+
+  async getTotalUsersData(): Promise<TotalUsersDataDto> {
+    const res = await this.client.get<TotalUsersDataDto>("/users/data");
+    if (!res.ok) {
+      throw new Error(res.error?.message || `Request failed (${res.status})`);
+    }
+    return res.data as TotalUsersDataDto;
   }
 
   async approveUser(id: string, approved: boolean): Promise<User> {
