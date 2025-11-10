@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useHeader, useNotification } from "shared";
+import { useCallback, useEffect, useMemo } from "react";
+import { useHeader, useNotification, useAdminAuth } from "shared";
 import { fields, IntentionsTable, schema } from "./components";
 import { FormBuilder } from "@/presentation";
 import Link from "next/link";
@@ -12,7 +12,7 @@ import {
 import { useUseCase } from "shared/hooks";
 
 export default function AdminPage() {
-  const [visible, setVisible] = useState(false);
+  const { isAuthenticated, setIsAuthenticated } = useAdminAuth();
   const adminPasswordKey = process.env.NEXT_PUBLIC_ADMIN_PASSWORD_KEY;
 
   const { setHeader, setShowBackButton, setShowMenu, setMenuItems } =
@@ -56,7 +56,7 @@ export default function AdminPage() {
     {
       onSuccess: (isValid: boolean) => {
         if (isValid) {
-          setVisible(true);
+          setIsAuthenticated(true);
           makeNotification({
             title: "Sucesso!",
             description: "Login realizado com sucesso",
@@ -100,7 +100,7 @@ export default function AdminPage() {
 
   return (
     <div className="flex justify-center items-center">
-      {!visible && (
+      {!isAuthenticated && (
         <div className="w-screen h-[calc(100dvh-100px)] flex flex-col justify-center items-center">
           <FormBuilder
             fields={fields}
@@ -115,7 +115,7 @@ export default function AdminPage() {
           )}
         </div>
       )}
-      {visible && <IntentionsTable />}
+      {isAuthenticated && <IntentionsTable />}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useHeader, useNotification, useUseCase } from "shared";
+import { useRouter } from "next/navigation";
+import { useHeader, useNotification, useUseCase, useAdminAuth } from "shared";
 import Link from "next/link";
 import { Typography } from "@/presentation";
 import { Cards, Chart } from "./components";
@@ -12,12 +13,20 @@ import {
 import { TotalUsersDataDto } from "domain/user/dtos/data.dto";
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const { isAuthenticated } = useAdminAuth();
   const { setHeader, setShowBackButton, setShowMenu, setMenuItems } =
     useHeader();
 
   const [total, setTotal] = useState<number>(0);
   const [approved, setApproved] = useState<number>(0);
   const { makeNotification } = useNotification();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/admin");
+    }
+  }, [isAuthenticated, router]);
 
   const fetchExecute = useCallback(
     (uc: GetTotalUsersDataUseCase) => uc.execute(),
@@ -76,6 +85,10 @@ export default function DashboardPage() {
     setShowMenu(true);
     setMenuItems(menuContent);
   }, [setHeader, setShowBackButton, setShowMenu, setMenuItems, menuContent]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-10 py-5">
