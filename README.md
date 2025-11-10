@@ -343,7 +343,3 @@ This project is part of a coding challenge for AG Sistemas.
 ## Contributors
 
 - Pedro Martins - [@PedroHAMartins](https://github.com/PedroHAMartins)
-
-## Contact
-
-For questions or support, please contact: pedrohamartins@outlook.com
