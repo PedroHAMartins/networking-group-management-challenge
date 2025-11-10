@@ -56,50 +56,23 @@ Relacionamentos:
 Para manter uma organização e componentização que tornem o projeto modular e com código reutilizável, a estrutura do frontend se baseia em uma arquitetura em camadas DDD (Domain-driven design), dividindo majoritariamente em Domain, Application e Infrastructure:
 
 ```plaintext
-/client                Raiz do frontend
-│
-├── /src               Código fonte
-│   │
-│   ├── /app               Rotas e actions
-│   │   ├── /server-actions        Requisições para a API do backend
-│   │   │   ├── /users                Requisições relacionadas a usuário
-│   │   │   ├── /notifications        ...
-│   │   │   ├── /payments             ...
-│   │   │   ├── /referrals            ...
-│   │   │   └── /meetings             ...
-│   │   └── /routers              Rotas e páginas
-│   │
-│   ├── /presentation        Arquivos relacionados à UI
-│   │   ├── /ui                 Componentes gerais de UI
-│   │   │   ├── /atoms              Componentes pequenos (ex: button, typography)
-│   │   │   ├── /molecules          Componentes médios (ex: modal, section)
-│   │   │   └── /organisms          Componentes grandes (ex: form, table)
-│   │   └── /utils               Helpers de UI
-│   │
-│   ├── /domain              Domain do projeto com entidades e enums
-│   │   ├── /entities
-│   │   └── /enums
-│   │
-│   ├── /application         Camada de application (DTOs e casos de uso)
-│   │   ├── /dtos                DTOs das requests
-│   │   │   ├── /user
-│   │   │   │   ├── /requests
-│   │   │   │   └── /responses
-│   │   │   ├── /notifications       ...
-│   │   │   ├── /payments            ...
-│   │   │   ├── /referrals           ...
-│   │   │   └── /meetings            ...
-│   │
-│   ├── /infrastructure      Implementação concreta de APIs, adapters e configs
-│   │   ├── /api
-│   │   ├── /adapters
-│   │   └── /config
-│   │
-│   └── /shared             Helpers, hooks, utils compartilhados entre camadas
-│       ├── /helpers
-│       ├── /hooks
-│       └── /utils
-│
+├── client/                          # Frontend
+│   ├── src/
+│   │   ├── app/                    # Next.js App Router
+│   │   │   ├── (private)/         # Rotas protegidas
+│   │   │   │   ├── admin/         # Rota admin
+│   │   │   │   │   └── dashboard/ # Dashboard com gráficos e dados
+│   │   │   │   └── full-form/     # Cadastro completo
+│   │   │   ├── (public)/          # Rotas públicas
+│   │   │   │   └── form/          # Cadastro inicial
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx           # Tela inicial com rotas acessíveis e entrada de token
+│   │   ├── lib/                   # Utilitários
+│   │   └── presentation/          # UI
+│   ├── application/               # Use cases
+│   ├── domain/                    # Entities & DTOs
+│   ├── infrastructure/            # Serviços externos (API, repositórios)
+│   └── shared/                    # Shared context & hooks
 └── /public              Assets públicos
 ```
 
